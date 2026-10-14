@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-16 flex-1 items-center justify-start bg-primary py-18">
+    <div className="flex flex-col gap-16 flex-1 items-center justify-start bg-primary py-18 px-6">
       <div className="flex flex-col items-center gap-3">
         <Image
           className="rounded-full bg-white"

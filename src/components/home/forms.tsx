@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { ArrowRight } from "lucide-react";
@@ -7,17 +6,27 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
 import { Field, FieldError, FieldGroup } from "../ui/field";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  link: z
-    .string()
-    .regex(
-      /^https:\/\/github\.com\/.+$/,
-      "Por favor, insira uma URL válida do GitHub",
-    ),
+  link: z.url("Insira uma URL válida").refine((value) => {
+    try {
+      const url = new URL(value);
+
+      return (
+        url.protocol === "https:" &&
+        url.hostname === "github.com" &&
+        /^\/[^/]+\/[^/]+\/?$/.test(url.pathname)
+      );
+    } catch (error) {
+      return false;
+    }
+  }, "Insira a URL de um repositório do GitHub"),
 });
 
 export default function Forms() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -26,7 +35,12 @@ export default function Forms() {
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data);
+    const url = new URL(data.link);
+    const [owner, repo] = url.pathname.split("/").filter(Boolean);
+
+    const repoUrl = `/repository/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+    // console.log("Redirecionando para:", repoUrl);
+    router.push(repoUrl);
   }
 
   return (

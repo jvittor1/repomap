@@ -1,7 +1,34 @@
-export default function Page() {
+import { getRepoData } from "@/lib/github";
+import { Suspense } from "react";
+
+type Props = {
+  params: Promise<{
+    owner: string;
+    repo: string;
+  }>;
+};
+
+export default async function RepositoryPage({ params }: Props) {
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-800 items-center justify-between p-24">
-      <h1 className="text-3xl text-zinc-100 font-bold">Nova pagina!</h1>
-    </div>
+    <Suspense fallback={<p>Carregando repositório...</p>}>
+      <RepositoryContent params={params} />
+    </Suspense>
+  );
+}
+
+async function RepositoryContent({ params }: Props) {
+  const { owner, repo } = await params;
+  const repository = await getRepoData(owner, repo);
+
+  console.log("Dados do repositório:", repository);
+
+  return (
+    <main>
+      <h1>{repository.full_name}</h1>
+      <p>{repository.description}</p>
+      <p>Stars: {repository.stargazers_count}</p>
+      <p>Forks: {repository.forks_count}</p>
+      <p>Branch: {repository.default_branch}</p>
+    </main>
   );
 }
