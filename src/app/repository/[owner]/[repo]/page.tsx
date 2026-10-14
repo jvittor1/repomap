@@ -1,4 +1,4 @@
-import { getRepoData } from "@/lib/github";
+import { getRepository, getRepositoryLanguages } from "@/lib/github";
 import { Suspense } from "react";
 
 type Props = {
@@ -18,9 +18,13 @@ export default async function RepositoryPage({ params }: Props) {
 
 async function RepositoryContent({ params }: Props) {
   const { owner, repo } = await params;
-  const repository = await getRepoData(owner, repo);
+  const [repository, languages] = await Promise.all([
+    getRepository(owner, repo),
+    getRepositoryLanguages(owner, repo),
+  ]);
 
   console.log("Dados do repositório:", repository);
+  console.log("Linguagens do repositório:", languages);
 
   return (
     <main>

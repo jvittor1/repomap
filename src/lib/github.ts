@@ -1,16 +1,21 @@
-export async function getRepoData(owner: string, repo: string) {
-  const response = await fetch(
-    `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`,
-  );
+const BASE_URL = "https://api.github.com";
 
-  if (response.status === 404) {
-    throw new Error("Repositório não encontrado");
-  }
+export async function getRepository(owner: string, repo: string) {
+  const response = await fetch(`${BASE_URL}/repos/${owner}/${repo}`);
 
   if (!response.ok) {
-    throw new Error("Erro ao buscar dados do repositório");
+    throw new Error("Erro ao buscar repositório");
   }
 
-  const data = await response.json();
-  return data;
+  return response.json();
+}
+
+export async function getRepositoryLanguages(owner: string, repo: string) {
+  const response = await fetch(`${BASE_URL}/repos/${owner}/${repo}/languages`);
+
+  if (!response.ok) {
+    throw new Error("Erro ao buscar linguagens");
+  }
+
+  return response.json();
 }
