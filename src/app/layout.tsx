@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const nunito = Nunito({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-nunito",
 });
 
 export const metadata: Metadata = {
@@ -21,9 +17,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${nunito.variable} ${nunito.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-screen flex flex-col">
+        <header className="flex bg-primary items-center border-b border-zinc-700 justify-between py-3 px-6">
+          <div className="flex items-center gap-3">
+            <Image
+              className="rounded-full bg-white"
+              src="/images/github.svg"
+              alt="GitHub"
+              width={18}
+              height={18}
+            />
+            <h2 className="text-lg text-secondary-white">RepoMap</h2>
+          </div>
+        </header>
+        <main className="w-full flex-1 flex flex-col">{children}</main>
+      </body>
     </html>
   );
 }
