@@ -1,5 +1,5 @@
 import { FileNode } from "@/lib/repository-tree";
-import { TreeItem, TreeView } from "../ui/tree-view";
+import { TreeItem, TreeView } from "../../ui/tree-view";
 
 function renderFileTree(node: FileNode) {
   return (

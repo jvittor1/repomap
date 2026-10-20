@@ -6,14 +6,9 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-import { RepositoryStat } from "@/components/repository/repository-stat";
-import {
-  CommitsTabContent,
-  FilesTabContent,
-  LanguagesTabContent,
-} from "@/components/repository/repository-tab-contents";
+import { RepositoryStat } from "@/components/repository/general/repository-stat";
 
-import { GeneralTabContent } from "@/components/repository/repository-tab-general";
+import { GeneralTabContent } from "@/components/repository/general/repository-tab-general";
 import {
   getRepository,
   getRepositoryCommits,
@@ -27,6 +22,9 @@ import { Suspense } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatDate } from "@/utils/date-formatter";
 import { buildFileTree } from "@/lib/repository-tree";
+import { FilesTabContent } from "@/components/repository/files/repository-tab-files";
+import { CommitsTabContent } from "@/components/repository/commits/repository-tab-commits";
+import { LanguagesTabContent } from "@/components/repository/languages/repository-tab-languages";
 
 type Props = {
   params: Promise<{
@@ -106,19 +104,17 @@ async function RepositoryContent({ params }: Props) {
           </div>
         </div>
 
-        <Button
-          className="rounded-md p-5  border border-zinc-500 "
-          variant="ghost"
+        <Link
+          className="rounded-md px-4 py-2 text-sm flex gap-2 items-center bg-primary  text-zinc-300 border border-zinc-600  hover:text-secondary-white hover:border-zinc-300 hover:shadow-md
+              active:scale-[0.98]
+              transition-all duration-200"
+          href={repository.html_url}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <ExternalLink />
-          <Link
-            href={repository.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ver no GitHub
-          </Link>
-        </Button>
+          <ExternalLink size={18} />
+          <span>Ver no GitHub</span>
+        </Link>
       </div>
 
       {/* Conteúdo Principal */}
@@ -145,7 +141,7 @@ async function RepositoryContent({ params }: Props) {
             <CommitsTabContent />
           </TabsContent>
           <TabsContent value="languages">
-            <LanguagesTabContent />
+            <LanguagesTabContent languages={languages} />
           </TabsContent>
         </Tabs>
       </div>

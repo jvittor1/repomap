@@ -1,6 +1,6 @@
 "use client";
 import { FileText, Folder, Info } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import {
   Card,
   CardAction,
@@ -9,14 +9,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "../../ui/card";
 import ReactMarkdown from "react-markdown";
-import { ScrollArea } from "../ui/scroll-area";
-import LanguagesStat from "./language-stat";
-import ProjectStructure from "./project-structure";
+import { ScrollArea } from "../../ui/scroll-area";
+
 import { FileNode } from "@/lib/repository-tree";
-import InfoRepository from "./info-repository";
 import { RepositoryInfo } from "@/types/repository";
+import LanguagesStat from "../../language-stat";
+import ProjectStructure from "./project-structure";
+import InfoRepository from "./info-repository";
 
 interface GeneralTabContentProps {
   content: string;
