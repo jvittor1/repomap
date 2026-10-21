@@ -7,6 +7,7 @@ type GitHubTreeEntry = {
 export type FileNode = {
   name: string;
   path: string;
+  size?: number;
   type: "file" | "folder";
   children: FileNode[];
 };
@@ -30,6 +31,7 @@ export function buildFileTree(entries: GitHubTreeEntry[]): FileNode[] {
         node = {
           name: part,
           path: currentPath,
+          size: entry.size,
           type: isFolder ? "folder" : "file",
           children: [],
         };

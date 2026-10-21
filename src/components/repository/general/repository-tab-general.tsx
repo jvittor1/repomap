@@ -1,5 +1,5 @@
 "use client";
-import { FileText, Folder, Info } from "lucide-react";
+import { FileText } from "lucide-react";
 import { Button } from "../../ui/button";
 import {
   Card,
@@ -16,8 +16,8 @@ import { ScrollArea } from "../../ui/scroll-area";
 import { FileNode } from "@/lib/repository-tree";
 import { RepositoryInfo } from "@/types/repository";
 import LanguagesStat from "../../language-stat";
-import ProjectStructure from "./project-structure";
 import InfoRepository from "./info-repository";
+import { ProjectStructureCard } from "../project-structure-card";
 
 interface GeneralTabContentProps {
   content: string;
@@ -58,18 +58,7 @@ export function GeneralTabContent({
         </ScrollArea>
       </Card>
 
-      <Card className="w-full  rounded-sm bg-primary border border-zinc-500 text-secondary-white">
-        <CardHeader className="border-b border-zinc-500">
-          <CardTitle className="flex items-end gap-2 text-sm">
-            <Folder /> Estrutura do Projeto
-          </CardTitle>
-        </CardHeader>
-        <ScrollArea className="h-80 px-2">
-          <CardContent className="prose prose-invert max-w-full">
-            <ProjectStructure files={files} />
-          </CardContent>
-        </ScrollArea>
-      </Card>
+      <ProjectStructureCard files={files} />
 
       <Card className="w-full  rounded-sm bg-primary border border-zinc-500 text-secondary-white">
         <CardHeader className="border-b border-zinc-500">
