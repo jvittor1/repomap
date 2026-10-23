@@ -24,7 +24,7 @@ export async function getRepositoryReadme(owner: string, repo: string) {
 }
 
 export function getRepositoryCommits(owner: string, repo: string) {
-  return githubFetch(`/repos/${owner}/${repo}/commits?per_page=10`);
+  return githubFetch(`/repos/${owner}/${repo}/commits?per_page=100`);
 }
 
 export function getRepositoryTree(owner: string, repo: string, branch: string) {

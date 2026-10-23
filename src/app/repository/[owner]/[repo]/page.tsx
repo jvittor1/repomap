@@ -25,6 +25,7 @@ import { buildFileTree } from "@/lib/repository-tree";
 import { FilesTabContent } from "@/components/repository/files/repository-tab-files";
 import { CommitsTabContent } from "@/components/repository/commits/repository-tab-commits";
 import { LanguagesTabContent } from "@/components/repository/languages/repository-tab-languages";
+import { toCommitItem } from "@/lib/commits";
 
 type Props = {
   params: Promise<{
@@ -53,6 +54,8 @@ async function RepositoryContent({ params }: Props) {
   const tree = await getRepositoryTree(owner, repo, repository.default_branch);
 
   const files = buildFileTree(tree.tree);
+
+  const commitItems = commits.map(toCommitItem);
 
   console.log("Dados do repositorio:", repository);
 
@@ -136,7 +139,7 @@ async function RepositoryContent({ params }: Props) {
             <FilesTabContent files={files} />
           </TabsContent>
           <TabsContent value="commits">
-            <CommitsTabContent />
+            <CommitsTabContent commits={commitItems} />
           </TabsContent>
           <TabsContent value="languages">
             <LanguagesTabContent languages={languages} />
