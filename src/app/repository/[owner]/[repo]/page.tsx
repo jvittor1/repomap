@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+﻿import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -35,7 +35,7 @@ type Props = {
 
 export default async function RepositoryPage({ params }: Props) {
   return (
-    <Suspense fallback={<p>Carregando repositório...</p>}>
+    <Suspense fallback={<p>Carregando repositorio...</p>}>
       <RepositoryContent params={params} />
     </Suspense>
   );
@@ -54,7 +54,7 @@ async function RepositoryContent({ params }: Props) {
 
   const files = buildFileTree(tree.tree);
 
-  console.log("Dados do repositório:", repository);
+  console.log("Dados do repositorio:", repository);
 
   return (
     <main className="flex-1 bg-primary flex flex-col text-secondary-white py-6 px-24 gap-6">
@@ -99,15 +99,13 @@ async function RepositoryContent({ params }: Props) {
             <RepositoryStat
               icon={ExternalLink}
               text={formatDate(commits[0]?.commit.author.date) || "N/A"}
-              name="Último Commit"
+              name="Ultimo Commit"
             />
           </div>
         </div>
 
         <Link
-          className="rounded-md px-4 py-2 text-sm flex gap-2 items-center bg-primary  text-zinc-300 border border-zinc-600  hover:text-secondary-white hover:border-zinc-300 hover:shadow-md
-              active:scale-[0.98]
-              transition-all duration-200"
+          className="rounded-md px-4 py-2 text-sm flex gap-2 items-center bg-primary text-zinc-300 border border-zinc-600 hover:text-secondary-white hover:border-zinc-300 hover:shadow-md active:scale-[0.98] transition-all duration-200"
           href={repository.html_url}
           target="_blank"
           rel="noopener noreferrer"
@@ -117,11 +115,11 @@ async function RepositoryContent({ params }: Props) {
         </Link>
       </div>
 
-      {/* Conteúdo Principal */}
+      {/* Conteudo Principal */}
       <div className="flex flex-col gap-4">
         <Tabs defaultValue="general" className="w-full">
           <TabsList variant="line">
-            <TabsTrigger value="general">Visão Geral</TabsTrigger>
+            <TabsTrigger value="general">Visao Geral</TabsTrigger>
             <TabsTrigger value="files">Arquivos</TabsTrigger>
             <TabsTrigger value="commits">Commits</TabsTrigger>
             <TabsTrigger value="languages">Linguagens</TabsTrigger>
@@ -135,7 +133,7 @@ async function RepositoryContent({ params }: Props) {
             />
           </TabsContent>
           <TabsContent value="files">
-            <FilesTabContent />
+            <FilesTabContent files={files} />
           </TabsContent>
           <TabsContent value="commits">
             <CommitsTabContent />

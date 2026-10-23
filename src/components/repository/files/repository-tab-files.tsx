@@ -1,6 +1,5 @@
-"use client";
+﻿"use client";
 
-import { Input } from "@/components/ui/input";
 import { FileNode } from "@/lib/repository-tree";
 import { ProjectStructureCard } from "../project-structure-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,6 +12,7 @@ import {
   getTopExtensions,
 } from "@/lib/files";
 import { useMemo, useState } from "react";
+import { SearchBar } from "../search-bar";
 
 interface FilesTabProps {
   files: FileNode[];
@@ -34,35 +34,11 @@ function CardContentBox({ title, children }: CardContentProps) {
   );
 }
 
-function FilterChip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`rounded-sm  cursor-pointer px-3 py-1 text-xs transition-colors ${
-        active
-          ? "bg-white text-black font-medium"
-          : "border border-zinc-500 text-zinc-300 hover:bg-zinc-800"
-      }`}
-    >
-      {children}
-    </button>
-  );
-}
-
 export function FilesTabContent({ files }: FilesTabProps) {
   const [query, setQuery] = useState("");
   const [ext, setExt] = useState<string | null>(null);
 
-  // cálculos sobre a árvore completa: não mudam com o filtro
+  // calculos sobre a arvore completa: nao mudam com o filtro
   const allFiles = useMemo(() => flattenFiles(files), [files]);
   const largest = useMemo(() => getLargestFiles(allFiles, 5), [allFiles]);
   const categories = useMemo(() => getCategoryStats(allFiles), [allFiles]);
@@ -70,7 +46,7 @@ export function FilesTabContent({ files }: FilesTabProps) {
   const topExts = useMemo(() => getTopExtensions(allFiles, 5), [allFiles]);
   const maxSize = largest[0]?.size ?? 1;
 
-  // árvore que será exibida
+  // arvore que sera exibida
   const filteredFiles = useMemo(
     () => filterTree(files, query, ext),
     [files, query, ext],
@@ -83,34 +59,15 @@ export function FilesTabContent({ files }: FilesTabProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex items-center justify-between w-full gap-4">
-        <Input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="bg-primary border border-zinc-500 p-5 rounded-sm text-secondary-white w-full max-w-lg"
-          placeholder="Buscar por nome de arquivos ou pasta..."
-        />
-
-        <div className="flex flex-wrap items-center gap-2">
-          <FilterChip active={ext === null} onClick={() => setExt(null)}>
-            Todos
-          </FilterChip>
-
-          {topExts.map(([e]) => (
-            <FilterChip
-              key={e}
-              active={ext === e}
-              onClick={() => setExt(ext === e ? null : e)}
-            >
-              {e}
-            </FilterChip>
-          ))}
-        </div>
-
-        <span className="text-xs text-zinc-400 ml-auto">
-          {matchCount} {matchCount === 1 ? "arquivo" : "arquivos"}
-        </span>
-      </div>
+      <SearchBar
+        query={query}
+        onQueryChange={setQuery}
+        ext={ext}
+        onExtChange={setExt}
+        topExts={topExts}
+        matchCount={matchCount}
+        placeholder="Buscar por nome de arquivos ou pasta..."
+      />
 
       <div className="grid grid-cols-4 gap-3">
         <div className="col-span-3">
