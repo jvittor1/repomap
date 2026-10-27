@@ -142,7 +142,7 @@ async function RepositoryContent({ params }: Props) {
             <CommitsTabContent commits={commitItems} />
           </TabsContent>
           <TabsContent value="languages">
-            <LanguagesTabContent languages={languages} />
+            <LanguagesTabContent languages={languages} files={files} />
           </TabsContent>
         </Tabs>
       </div>
