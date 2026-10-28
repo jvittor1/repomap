@@ -4,8 +4,8 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbSeparator,
+  BreadcrumbLink,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import { RepositoryStat } from "@/components/repository/general/repository-stat";
 
 import { GeneralTabContent } from "@/components/repository/general/repository-tab-general";
@@ -16,7 +16,7 @@ import {
   getRepositoryReadme,
   getRepositoryTree,
 } from "@/lib/github";
-import { ExternalLink, GitBranch, GitFork, Star } from "lucide-react";
+import { ExternalLink, GitBranch, GitFork, House, Star } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -26,6 +26,7 @@ import { FilesTabContent } from "@/components/repository/files/repository-tab-fi
 import { CommitsTabContent } from "@/components/repository/commits/repository-tab-commits";
 import { LanguagesTabContent } from "@/components/repository/languages/repository-tab-languages";
 import { toCommitItem } from "@/lib/commits";
+import { Loading } from "@/components/loading";
 
 type Props = {
   params: Promise<{
@@ -36,7 +37,7 @@ type Props = {
 
 export default async function RepositoryPage({ params }: Props) {
   return (
-    <Suspense fallback={<p>Carregando repositorio...</p>}>
+    <Suspense fallback={<Loading message="Carregando..." />}>
       <RepositoryContent params={params} />
     </Suspense>
   );
@@ -64,9 +65,31 @@ async function RepositoryContent({ params }: Props) {
       {/* Componente de breadcrumb */}
       <Breadcrumb>
         <BreadcrumbList>
-          <BreadcrumbItem>{owner}</BreadcrumbItem>
+          <BreadcrumbItem className=" cursor-pointer">
+            <BreadcrumbLink className="hover:text-secondary-white" href="/">
+              <House size={12} />
+            </BreadcrumbLink>
+          </BreadcrumbItem>
           <BreadcrumbSeparator />
-          <BreadcrumbItem>{repo}</BreadcrumbItem>
+          <BreadcrumbItem className=" cursor-pointer">
+            <BreadcrumbLink
+              className="hover:text-secondary-white"
+              href={`https://github.com/${owner}`}
+              target="_blank"
+            >
+              {owner}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem className="cursor-pointer">
+            <BreadcrumbLink
+              className="hover:text-secondary-white"
+              href={repository.html_url}
+              target="_blank"
+            >
+              {repo}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 

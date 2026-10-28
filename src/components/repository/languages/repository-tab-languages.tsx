@@ -67,13 +67,7 @@ export function LanguagesTabContent({
 
       <LanguagesTableCard languages={languages} fileCounts={fileCounts} />
 
-      <div className="flex gap-4">
-        <LanguagesFolderComposition folders={folders} />
-
-        <LanguagesCardInfos title="Tecnologias Detectadas">
-          ...
-        </LanguagesCardInfos>
-      </div>
+      <LanguagesFolderComposition folders={folders} />
     </div>
   );
 }

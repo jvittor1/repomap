@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import Link from "next/link";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -21,16 +22,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-screen flex flex-col">
         <header className="flex bg-primary items-center border-b border-zinc-700 justify-between py-3 px-6">
-          <div className="flex items-center gap-3">
-            <Image
-              className="rounded-full bg-white"
-              src="/images/github.svg"
-              alt="GitHub"
-              width={18}
-              height={18}
-            />
-            <h2 className="text-lg text-secondary-white">RepoMap</h2>
-          </div>
+          <Link href="/">
+            <div className="flex items-center gap-3 cursor-pointer">
+              <Image
+                className="rounded-full bg-white"
+                src="/images/github.svg"
+                alt="GitHub"
+                width={18}
+                height={18}
+              />
+              <h2 className="text-lg text-secondary-white">RepoMap</h2>
+            </div>
+          </Link>
         </header>
         <main className="w-full flex-1 flex flex-col">{children}</main>
       </body>
