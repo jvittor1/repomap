@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿# RepoMap
 
-## Getting Started
+> Explore qualquer repositório do GitHub. Entenda a estrutura, veja os principais arquivos e descubra mais sobre o projeto de forma rápida e fácil.
 
-First, run the development server:
+## 📋 Sobre o Projeto
+
+O **RepoMap** é uma aplicação web que permite explorar e analisar repositórios públicos do GitHub de forma visual e intuitiva. Basta informar o dono e o nome do repositório para obter uma visão completa sobre a estrutura, linguagens, commits e arquivos do projeto.
+
+## ✨ Funcionalidades
+
+- **Visão Geral** — Exibe o README do repositório, linguagens utilizadas, estrutura de diretórios e informações gerais (criação, licença, tamanho, forks, watchers, issues abertas).
+- **Explorador de Arquivos** — Navegue pela árvore de arquivos com busca por nome e filtro por extensão. Veja as categorias de arquivos e os maiores arquivos do repositório.
+- **Análise de Linguagens** — Linguagem dominante, total de código em bytes, quantidade de linguagens e arquivos de código. Tabela detalhada com percentuais e composição por pasta.
+- **Histórico de Commits** — Timeline agrupada por dia com suporte a busca por mensagem ou autor e filtro por tipo de commit (conventional commits). Paginação progressiva com "Carregar mais".
+
+## 🛠️ Tecnologias
+
+| Tecnologia                                                                | Versão | Uso                              |
+| ------------------------------------------------------------------------- | ------ | -------------------------------- |
+| [Next.js](https://nextjs.org/)                                            | 16.4.3 | Framework principal (App Router) |
+| [React](https://react.dev/)                                               | 19.3.0 | UI                               |
+| [TypeScript](https://www.typescriptlang.org/)                             | ^5     | Tipagem estática                 |
+| [Tailwind CSS](https://tailwindcss.com/)                                  | ^4     | Estilização                      |
+| [shadcn/ui](https://ui.shadcn.com/) + [Base UI](https://base-ui.com/)     | —      | Componentes de interface         |
+| [Lucide React](https://lucide.dev/)                                       | ^1.57  | Ícones                           |
+| [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) | —      | Formulários e validação          |
+| [react-markdown](https://github.com/remarkjs/react-markdown)              | ^10.1  | Renderização do README           |
+| [GitHub REST API](https://docs.github.com/en/rest)                        | v3     | Fonte de dados                   |
+
+## 🚀 Como Executar
+
+### Pré-requisitos
+
+- Node.js 18+
+- npm ou outro gerenciador de pacotes compatível
+
+### Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/jvittor1/repomap.git
+cd repomap
+
+# Instale as dependências
+npm install
+```
+
+### Desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build de Produção
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 📁 Estrutura do Projeto
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── page.tsx                        # Página inicial (busca de repositório)
+│   ├── layout.tsx                      # Layout raiz
+│   ├── globals.css                     # Estilos globais
+│   └── repository/[owner]/[repo]/
+│       └── page.tsx                    # Página de detalhes do repositório
+├── components/
+│   ├── home/
+│   │   ├── forms.tsx                   # Formulário de busca
+│   │   └── feature-card.tsx            # Cards de funcionalidades
+│   ├── repository/
+│   │   ├── general/                    # Aba "Visão Geral"
+│   │   ├── files/                      # Aba "Arquivos"
+│   │   ├── languages/                  # Aba "Linguagens"
+│   │   ├── commits/                    # Aba "Commits"
+│   │   ├── project-structure-card.tsx  # Componente de árvore de arquivos
+│   │   └── search-bar.tsx              # Barra de busca/filtro compartilhada
+│   ├── ui/                             # Componentes base (shadcn/ui)
+│   ├── loading.tsx                     # Indicador de carregamento
+│   └── language-stat.tsx               # Estatísticas de linguagens
+├── lib/
+│   ├── github.ts                       # Chamadas à API do GitHub
+│   ├── commits.ts                      # Parsing e agrupamento de commits
+│   ├── files.ts                        # Utilitários de arquivos (busca, stats)
+│   ├── language.ts                     # Análise de linguagens por pasta
+│   ├── language-colors.ts              # Mapa de cores por linguagem
+│   └── repository-tree.ts              # Construção da árvore de diretórios
+├── types/
+│   └── repository.ts                   # Tipos TypeScript do repositório
+├── hooks/
+│   └── use-controllable-state.ts       # Hook de estado controlável
+└── utils/
+    └── date-formatter.ts               # Utilitário de formatação de datas
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔌 Integração com a API do GitHub
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+O projeto consome a **GitHub REST API v3** (sem autenticação). As seguintes rotas são utilizadas:
 
-## Deploy on Vercel
+| Endpoint                                                   | Dados                             |
+| ---------------------------------------------------------- | --------------------------------- |
+| `GET /repos/{owner}/{repo}`                                | Informações gerais do repositório |
+| `GET /repos/{owner}/{repo}/languages`                      | Linguagens e bytes por linguagem  |
+| `GET /repos/{owner}/{repo}/readme`                         | Conteúdo do README (base64)       |
+| `GET /repos/{owner}/{repo}/commits`                        | Últimos 100 commits               |
+| `GET /repos/{owner}/{repo}/git/trees/{branch}?recursive=1` | Árvore de arquivos completa       |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> **Nota:** A API pública do GitHub possui limite de requisições de **60 req/hora** para IPs não autenticados. Para repositórios grandes ou uso intenso, considere adicionar um token de acesso.
