@@ -16,7 +16,7 @@ export default function Home() {
           height={48}
         />
 
-        <h1 className="text-3xl font-bold text-secondary-white">RepoMap</h1>
+        <h1 className="text-3xl font-bold text-white">RepoMap</h1>
         <p className="text-zinc-400 text-sm text-center">
           Explore qualquer repositório do GitHub.
           <br />

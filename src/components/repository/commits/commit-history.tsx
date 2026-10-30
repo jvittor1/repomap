@@ -39,7 +39,7 @@ export function CommitTimeline({ groups }: { groups: CommitGroup[] }) {
                     />
 
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm text-secondary-white">
+                      <p className="text-sm text-white">
                         {c.type && (
                           <Badge
                             className={`mr-2 rounded px-1.5 py-0 text-[11px] ${style.badge}`}

@@ -8,7 +8,7 @@ export function Loading({ message }: { message: string }) {
         variant="outline"
         disabled
         size="default"
-        className="bg-primary text-secondary-white rounded-sm "
+        className="bg-primary text-white rounded-sm "
       >
         <Spinner data-icon="inline-start" />
         {message}

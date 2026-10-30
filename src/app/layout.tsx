@@ -31,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 width={18}
                 height={18}
               />
-              <h2 className="text-lg text-secondary-white">RepoMap</h2>
+              <h2 className="text-lg text-white">RepoMap</h2>
             </div>
           </Link>
         </header>

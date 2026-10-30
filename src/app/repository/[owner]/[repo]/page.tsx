@@ -61,19 +61,19 @@ async function RepositoryContent({ params }: Props) {
   console.log("Dados do repositorio:", repository);
 
   return (
-    <main className="flex-1 bg-primary flex flex-col text-secondary-white py-6 px-24 gap-6">
+    <main className="flex-1 bg-primary flex flex-col text-white py-6 px-24 gap-6">
       {/* Componente de breadcrumb */}
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem className=" cursor-pointer">
-            <BreadcrumbLink className="hover:text-secondary-white" href="/">
+            <BreadcrumbLink className="hover:text-white" href="/">
               <House size={12} />
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem className=" cursor-pointer">
             <BreadcrumbLink
-              className="hover:text-secondary-white"
+              className="hover:text-white"
               href={`https://github.com/${owner}`}
               target="_blank"
             >
@@ -83,7 +83,7 @@ async function RepositoryContent({ params }: Props) {
           <BreadcrumbSeparator />
           <BreadcrumbItem className="cursor-pointer">
             <BreadcrumbLink
-              className="hover:text-secondary-white"
+              className="hover:text-white"
               href={repository.html_url}
               target="_blank"
             >
@@ -102,9 +102,7 @@ async function RepositoryContent({ params }: Props) {
 
         <div className="flex-1 items-center flex flex-col gap-2">
           <h1 className="text-2xl font-bold">{repository.name}</h1>
-          <p className="text-sm text-secondary-white/70">
-            {repository.description}
-          </p>
+          <p className="text-sm text-white/70">{repository.description}</p>
 
           <div className="flex gap-12 mt-2">
             <RepositoryStat
@@ -131,7 +129,7 @@ async function RepositoryContent({ params }: Props) {
         </div>
 
         <Link
-          className="rounded-md px-4 py-2 text-sm flex gap-2 items-center bg-primary text-zinc-300 border border-zinc-600 hover:text-secondary-white hover:border-zinc-300 hover:shadow-md active:scale-[0.98] transition-all duration-200"
+          className="rounded-md px-4 py-2 text-sm flex gap-2 items-center bg-primary text-zinc-300 border border-zinc-600 hover:text-white hover:border-zinc-300 hover:shadow-md active:scale-[0.98] transition-all duration-200"
           href={repository.html_url}
           target="_blank"
           rel="noopener noreferrer"

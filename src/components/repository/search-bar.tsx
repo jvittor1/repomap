@@ -46,11 +46,13 @@ export function SearchBar({
   className = "",
 }: SearchBarProps) {
   return (
-    <div className={`flex items-center justify-between w-full gap-4 ${className}`}>
+    <div
+      className={`flex items-center justify-between w-full gap-4 ${className}`}
+    >
       <Input
         value={query}
         onChange={(e) => onQueryChange(e.target.value)}
-        className="bg-primary border border-zinc-500 p-5 rounded-sm text-secondary-white w-full max-w-lg"
+        className="bg-primary border border-zinc-500 p-5 rounded-sm text-white w-full max-w-lg"
         placeholder={placeholder}
       />
 

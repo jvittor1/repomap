@@ -57,7 +57,7 @@ export default function Forms() {
               <Input
                 {...field}
                 placeholder="Cole a URL do repositório (ex: https://github.com/usuario/repo)"
-                className="bg-primary text-secondary-white  pr-36 "
+                className="bg-primary text-white  pr-36 "
               />
 
               <div className="min-h-5">
@@ -73,7 +73,7 @@ export default function Forms() {
         />
         <Button
           type="submit"
-          className="absolute right-3 top-[32%] -translate-y-1/2 bg-secondary-white text-primary hover:text-secondary-white cursor-pointer rounded-md font-bold py-4.5 hover:border-secondary-white"
+          className="absolute right-3 top-[32%] -translate-y-1/2 bg-white text-primary hover:text-white cursor-pointer rounded-md font-bold py-4.5 hover:border-white"
         >
           <ArrowRight className="size-5" />
           <span className="text-sm">Explorar</span>

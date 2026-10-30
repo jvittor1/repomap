@@ -25,7 +25,7 @@ interface CardContentProps {
 
 function CardContentBox({ title, children }: CardContentProps) {
   return (
-    <Card className=" bg-primary border border-zinc-500 p-5 rounded-sm text-secondary-white px-0">
+    <Card className=" bg-primary border border-zinc-500 p-5 rounded-sm text-white px-0">
       <CardHeader>
         <CardTitle className="text-sm text-zinc-400">{title}</CardTitle>
       </CardHeader>
@@ -123,7 +123,7 @@ export function FilesTabContent({ files }: FilesTabProps) {
             <div className="flex flex-col gap-3 w-full">
               {largest.map((file) => (
                 <div key={file.path} className="flex flex-col gap-1 w-full">
-                  <div className="flex items-center justify-between gap-2 text-secondary-white">
+                  <div className="flex items-center justify-between gap-2 text-white">
                     <span className="text-sm truncate" title={file.path}>
                       {file.name}
                     </span>

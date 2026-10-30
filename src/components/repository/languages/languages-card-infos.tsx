@@ -10,7 +10,7 @@ export default function LanguagesCardInfos({
   children,
 }: LanguagesCardInfosProps) {
   return (
-    <Card className="bg-primary border border-zinc-500 p-4 rounded-sm text-secondary-white w-full">
+    <Card className="bg-primary border border-zinc-500 p-4 rounded-sm text-white w-full">
       <CardTitle className="text-sm text-zinc-400">{title}</CardTitle>
       <CardContent className="p-0">{children}</CardContent>
     </Card>

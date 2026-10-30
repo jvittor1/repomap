@@ -263,9 +263,7 @@ const TreeItem = ({
       "group flex h-7 w-full items-center gap-1.5 rounded-sm pe-2 text-start transition-colors outline-none",
       "hover:bg-zinc-700 focus-visible:bg-zinc-700 focus-visible:ring-2 focus-visible:ring-ring",
       "disabled:cursor-not-allowed disabled:opacity-50",
-      isSelected
-        ? "bg-zinc-700 font-medium text-secondary-white"
-        : "text-zinc-300",
+      isSelected ? "bg-zinc-700 font-medium text-white" : "text-zinc-300",
     ),
     onKeyDown: onTriggerKeyDown,
     onFocus: () => setTabbable(value),

@@ -13,7 +13,7 @@ export function RepositoryStat({
 }: RepositoryStatProps) {
   return (
     <div className="flex flex-col items-start gap-1 text-sm text-zinc-500">
-      <h3 className="flex items-center gap-1 text-secondary-white">
+      <h3 className="flex items-center gap-1 text-white">
         <Icon className="h-4 w-4" /> {text}
       </h3>
       <span>{name}</span>

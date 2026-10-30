@@ -33,7 +33,7 @@ export function LanguagesFolderComposition({
           {folders.map((folder) => (
             <div key={folder.name} className="flex flex-col w-full gap-2">
               <div className="flex justify-between text-zinc-400 text-sm">
-                <span className="text-secondary-white flex items-center gap-2">
+                <span className="text-white flex items-center gap-2">
                   <FolderIcon size={12} />
                   {folder.name}
                 </span>
